@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Заявки</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div class="d-xl-flex justify-content-xl-center"><img src="/img/bg.jpg" style="position: fixed;" height="100%"
+                                                      width="100%"></div>
+<h1 class="text-center text-white d-none d-lg-block site-heading"
+    style="margin-top: 0px;padding-top: 80px;position: relative;text-shadow: 0px 0px 20px var(--bs-black);">
+    <span class="fw-semibold site-heading-lower">Заявки</span>
+</h1>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="page-section clearfix" style="position: relative;">
+    <div class="container"
+         style="background: rgba(255,255,255,0.85);padding: 15px;margin-bottom: 20px;border-radius: 10px; font-size: 1.5em">
+        <div class="row" th:each="r : ${requests}">
+            <div class="col">
+                <p class="lead">Пользователь: <span th:text="${r.user.username}"></span></p>
+            </div>
+            <div class="col">
+                <p class="lead">Сообщение: <span th:text="${r.message}"></span></p>
+            </div>
+            <div class="col">
+                <p class="lead">Телефон: <span th:text="${r.tel}"></span></p>
+            </div>
+            <div class="col">
+                <p class="lead">Статус: <span th:text="${r.status.name}"></span></p>
+            </div>
+            <div th:if="${r.status.name() == 'FRESH'}" class="col-auto">
+                <a class="btn btn-primary" th:href="'/ads/requests/in_consideration/' + ${r.id}" >В рассмотрение</a>
+            </div>
+            <div th:if="${r.status.name() == 'IN_CONSIDERATION'}" class="col-auto">
+                <a class="btn btn-primary" th:href="'/ads/requests/answered/' + ${r.id}" >Отвечено</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/current-day.js"></script>
+<script src="/js/Lightbox-Gallery.js"></script>
+</body>
+
+</html>

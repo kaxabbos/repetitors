@@ -1,0 +1,20 @@
+<nav th:fragment="nav" class="navbar navbar-dark navbar-expand-lg py-lg-4" id="mainNav" style="background: rgba(31,141,33,0.9)">
+    <div class="container">
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive">
+            <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="/" style="color: var(--bs-white);">Каталог репетиторов</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about" style="color: var(--bs-white);">Информация</a></li>
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" href="/stats" style="color: var(--bs-white);">Статистика</a></li>
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" href="/users" style="color: var(--bs-white);">Аккаунты</a></li>
+                <li th:if="${role == 'MANAGER'}" class="nav-item"><a class="nav-link" href="/ads/my" style="color: var(--bs-white);">Мои услуги</a></li>
+                <li th:if="${role == 'MANAGER'}" class="nav-item"><a class="nav-link" href="/ads/add" style="color: var(--bs-white);">Опубликовать предложение</a></li>
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="nav-link" href="/login" style="color: var(--bs-white);">Вход</a></li>
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="nav-link" href="/reg" style="color: var(--bs-white);">Регистрация</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item"><a class="nav-link" href="/logout" style="color: var(--bs-white);">Выход</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

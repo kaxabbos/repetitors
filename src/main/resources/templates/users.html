@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Аккаунты</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4) 100%), url(&quot;assets/img/1655394924_20-phonoteka-org-p-oboi-na-telefon-doroga-28.jpg&quot;) top / cover no-repeat;">
+<div class="d-xl-flex justify-content-xl-center">
+    <img src="/img/bg.jpg" style="position: fixed;" height="100%" width="100%">
+</div>
+<h1 class="text-center text-white d-none d-lg-block site-heading"
+    style="position: relative;margin-top: 0px;padding-top: 80px;text-shadow: 0px 0px 20px var(--bs-black);"><span
+        class="fw-semibold site-heading-lower">Аккаунты</span></h1>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="page-section clearfix" style="position: relative;">
+    <div class="container">
+        <div th:if="${message}" class="row d-xl-flex justify-content-xl-center" style="margin-bottom: 20px;">
+            <div class="col-8">
+                <div class="text-center intro-text p-5 rounded bg-faded">
+                    <p class="lead" style="margin-bottom: 0" th:text="${message}"></p>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="background: rgba(255,255,255,0.85);padding: 15px;border-radius: 10px;">
+            <div th:each="u : ${users}" class="col-12" style="margin-bottom: 10px;">
+                <form style="border-radius: 10px;" th:action="'/users/edit/' + ${u.id}" method="post">
+                    <div class="row">
+                        <div class="col d-xl-flex justify-content-xl-center">
+                            <input class="form-control" type="text" disabled="" th:value="${u.username}"></div>
+                        <div class="col d-xl-flex justify-content-xl-center">
+                            <select class="form-select" name="role">
+                                <option th:each="r : ${roles}" th:value="${r}" th:label="${r.name}"
+                                        th:selected="${r == u.role}"></option>
+                            </select>
+                        </div>
+                        <div class="col-1 d-xl-flex justify-content-xl-center">
+                            <button class="btn btn-success" type="submit">Изменить</button>
+                        </div>
+                        <div class="col-1 d-xl-flex justify-content-xl-center">
+                            <a class="btn btn-danger" role="button" th:href="'/users/delete/' + ${u.id}">Удалить</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/current-day.js"></script>
+<script src="/js/Lightbox-Gallery.js"></script>
+</body>
+
+</html>

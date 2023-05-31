@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Вход</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+    <div class="d-xl-flex justify-content-xl-center"><img src="/img/bg.jpg" style="position: fixed;" height="100%" width="100%"></div>
+    <h1 class="text-center text-white d-none d-lg-block site-heading" style="position: relative;margin-top: 0px;padding-top: 80px;text-shadow: 0px 0px 20px var(--bs-black);"><span class="fw-semibold site-heading-lower">Repetitors</span></h1>
+    <div th:insert="blocks/nav :: nav"></div>
+    <section class="page-section clearfix" style="position: relative;">
+        <div class="container">
+            <div th:if="${param.error}" class="row d-xl-flex justify-content-xl-center" style="margin-bottom: 20px;">
+                <div class="col-8">
+                    <div class="text-center intro-text p-5 rounded bg-faded">
+                        <p class="lead" style="margin-bottom: 0">Некорректный ввод логина или пароля!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-xl-flex justify-content-xl-center">
+                <div class="col-8">
+                    <div class="text-center intro-text p-5 rounded bg-faded">
+                        <h1 style="margin-bottom: 15px;">Авторизация</h1>
+                        <form action="/login" method="post">
+                            <div class="row">
+                                <div class="col-12" style="margin-bottom: 20px;"><input class="form-control" type="text" name="username" placeholder="Введите логин"></div>
+                                <div class="col-12" style="margin-bottom: 20px;"><input class="form-control" type="password" name="password" placeholder="Введите пароль"></div>
+                                <div class="col-12" style="margin-bottom: 20px;"><button class="btn btn-success" type="submit" style="width: 100%;">Войти</button></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script src="/js/current-day.js"></script>
+    <script src="/js/Lightbox-Gallery.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Опубликовать предложение</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div class="d-xl-flex justify-content-xl-center">
+    <img src="/img/bg.jpg" style="position: fixed;" height="100%" width="100%">
+</div>
+<h1 class="text-center text-white d-none d-lg-block site-heading"
+    style="margin-top: 0px;padding-top: 80px;position: relative;text-shadow: 0px 0px 20px var(--bs-black);"><span
+        class="fw-semibold site-heading-lower">Опубликовать предложение</span></h1>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="page-section clearfix" style="position: relative;">
+    <div class="container">
+        <div th:if="${message}" class="row d-xl-flex justify-content-xl-center" style="margin-bottom: 20px;">
+            <div class="col-8">
+                <div class="text-center intro-text p-5 rounded bg-faded">
+                    <p class="lead" style="margin-bottom: 0" th:text="${message}"></p>
+                </div>
+            </div>
+        </div>
+        <form style="background: rgba(255,255,255,0.85);padding: 15px;margin-bottom: 20px;border-radius: 10px;"
+              action="/ads/add" method="post" enctype="multipart/form-data">
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <p style="margin-bottom: 5px;">Название</p><input class="form-control" type="text" name="name"
+                                                                      required="">
+                </div>
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <p style="margin-bottom: 5px;">Цена за занятие</p><input class="form-control" type="number"
+                                                                             name="price"
+                                                                             min="0" max="1000000" step="1" required="">
+                </div>
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <p style="margin-bottom: 5px;">Предмет</p>
+                    <select class="form-select" required="" name="category">
+                        <option th:each="b : ${categories}" th:value="${b}" th:label="${b.name}"></option>
+                    </select>
+                </div>
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <p style="margin-bottom: 5px;">Тип</p>
+                    <select class="form-select" required="" name="type">
+                        <option th:each="f : ${types}" th:value="${f}" th:label="${f.name}"></option>
+                    </select>
+                </div>
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <p style="margin-bottom: 5px;">Фотографии</p><input class="form-control" type="file" name="photos"
+                                                                        multiple="" accept="image/*" required="">
+                </div>
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <p style="margin-bottom: 5px;">Телефон номер</p><input class="form-control" type="tel" name="tel"
+                                                                           required="">
+                </div>
+                <div class="col-12" style="margin-bottom: 10px;">
+                    <p style="margin-bottom: 5px;">Описание</p><input class="form-control" type="text"
+                                                                      name="description" required="">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-6" style="margin-bottom: 10px;">
+                    <button class="btn btn-success" type="submit" style="margin-right: 5px;">Опубликовать предложение
+                    </button>
+                    <button class="btn btn-dark" type="reset">Очистить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/current-day.js"></script>
+<script src="/js/Lightbox-Gallery.js"></script>
+</body>
+
+</html>

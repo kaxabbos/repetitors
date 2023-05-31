@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Каталог репетиторов</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div class="d-xl-flex justify-content-xl-center"><img src="/img/bg.jpg" style="position: fixed;" height="100%"
+                                                      width="100%"></div>
+<h1 class="text-center text-white d-none d-lg-block site-heading"
+    style="margin-top: 0px;padding-top: 80px;position: relative;text-shadow: 0px 0px 20px var(--bs-black);">
+    <span class="fw-semibold site-heading-lower">Repetitors</span>
+</h1>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="page-section clearfix" style="position: relative;">
+    <div class="container">
+        <form style="background: rgba(255,255,255,0.85);padding: 15px;margin-bottom: 20px;border-radius: 10px;"
+              action="/search" method="post">
+            <div class="row">
+                <div class="col d-xl-flex justify-content-xl-center">
+                    <input class="form-control" type="text" name="search" placeholder="Введите название..."
+                           th:value="${search}">
+                </div>
+                <div class="col d-xl-flex justify-content-xl-center">
+                    <select class="form-select" required="" name="category">
+                        <option th:each="b : ${categories}" th:value="${b}" th:label="${b.name}"
+                                th:selected="${b == bSelect}"></option>
+                    </select>
+                </div>
+                <div class="col d-xl-flex justify-content-xl-center">
+                    <select class="form-select" required="" name="type">
+                        <option th:each="f : ${types}" th:value="${f}" th:label="${f.name}"
+                                th:selected="${f == fSelect}"></option>
+                    </select>
+                </div>
+                <div class="col-1 d-xl-flex justify-content-xl-center">
+                    <button class="btn btn-success" type="submit">Поиск</button>
+                </div>
+                <div class="col-1 d-xl-flex justify-content-xl-center"><a class="btn btn-dark" role="button" href="/">Сбросить</a>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div th:each="c : ${ads}" class="col-4">
+                <div class="text-center intro-text p-5 rounded bg-faded">
+                    <a th:href="'/ads/' + ${c.id}">
+                        <img th:src="'/img/' + ${c.photos[0]}" width="100%"
+                             style="border-radius: 20px;margin-bottom: 10px;"></a>
+                    <h2 th:text="${c.name}"></h2>
+                    <p class="lead text-start" style="margin-bottom: 0">Предмет:&nbsp;<a
+                            th:href="'/search/category/' + ${c.description.category}"><span
+                            th:text="${c.description.category.name}"></span></a></p>
+                    <p class="lead text-start" style="margin-bottom: 0">Тип:&nbsp;<a
+                            th:href="'/search/type/' + ${c.description.type}"><span
+                            th:text="${c.description.type.name}"></span></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/current-day.js"></script>
+<script src="/js/Lightbox-Gallery.js"></script>
+</body>
+
+</html>
